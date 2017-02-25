@@ -1,0 +1,12 @@
+#+TITLE: Setup Development Environment with Vagrant + Docker
+#+OPTIONS: toc:2 num:nil
+
+Setup a cross-platform development environment with Vagrant + Docker
+
+Requires:
+- packer
+- vagrant
+- virtualbox
+
+Note:
+- change ssh pub and private key configs with your own key settings

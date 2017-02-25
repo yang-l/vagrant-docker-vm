@@ -1,0 +1,7 @@
+- src: https://github.com/rattermeyer/ansible-role-virtualbox-guest.git
+  version: master
+  name: virtualbox-guest
+
+- src: https://github.com/angstwad/docker.ubuntu.git
+  version: v2.2.1
+  name: docker

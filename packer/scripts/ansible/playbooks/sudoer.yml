@@ -1,0 +1,9 @@
+---
+- name: Config sudoers for user - vagrant
+  lineinfile:
+    dest=/etc/sudoers.d/{{ vagrant_user }}
+    line="{{ vagrant_user }} ALL=(ALL) NOPASSWD:ALL"
+    state=present
+    create=yes
+    validate='visudo -cf %s'
+  become: true

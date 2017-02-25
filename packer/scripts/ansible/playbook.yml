@@ -1,0 +1,15 @@
+---
+- name: VM Setup
+  hosts: localhost
+
+  pre_tasks:
+  - include: playbooks/set-authorized-key.yml
+  - include: playbooks/sudoer.yml
+
+  roles:
+  - role: virtualbox-guest
+    virtualbox_version: "5.1.14"
+    iso_checksum: "sha256:1b206b76050dccd3ed979307230f9ddea79551e1c0aba93faee77416733cdc8a"
+  - role: docker
+    docker_group_members:
+    - "{{ vagrant_user }}"

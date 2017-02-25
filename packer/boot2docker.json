@@ -1,0 +1,64 @@
+{
+  "variables": {
+    "boot2docker_version": "v1.13.1",
+    "iso_checksum": "1f1ce49fae03b063d98ff70e945b971fd4d111f4a91e533a0812bb961a7bcb02",
+    "iso_checksum_type": "sha256",
+    "ssh_username": "docker",
+    "ssh_password": "tcuser",
+    "vm_cpu": "1",
+    "vm_memory": "2048",
+    "vm_disksize": "50000",
+    "vm_nic": "virtio",
+    "headless": "true",
+    "vagrantfile_template": "vagrantfile.boot2docker.tpl"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "guest_os_type": "Linux_64",
+      "guest_additions_mode": "attach",
+      "disk_size": "{{ user `vm_disksize` }}",
+      "headless": "{{ user `headless` }}",
+      "iso_url": "https://github.com/boot2docker/boot2docker/releases/download/{{ user `boot2docker_version` }}/boot2docker.iso",
+      "iso_checksum": "{{ user `iso_checksum` }}",
+      "iso_checksum_type": "{{ user `iso_checksum_type` }}",
+      "iso_target_path": "packer_cache/{{ user `iso_checksum` }}.iso",
+      "output_directory": "vm/virtualbox",
+      "vm_name": "boot2docker-{{ user `boot2docker_version` }}",
+      "ssh_username": "{{ user `ssh_username` }}",
+      "ssh_password": "{{ user `ssh_password` }}",
+      "ssh_port": 22,
+      "boot_wait": "5s",
+      "shutdown_command": "sudo poweroff",
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--memory", "{{ user `vm_memory` }}" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "{{ user `vm_cpu` }}" ],
+        [ "modifyvm", "{{.Name}}", "--nictype1", "{{ user `vm_nic` }}" ]
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "packer_cache/{{ user `iso_checksum` }}.iso",
+      "destination": "/tmp/boot2docker.iso"
+    },
+    {
+      "type": "shell",
+      "execute_command": "{{ .Vars }} sudo -E -S sh '{{ .Path }}'",
+      "scripts": [
+        "scripts/boot2docker-provision.sh"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "keep_input_artifact": false,
+      "compression_level": "9",
+      "output": "box/{{.Provider}}/boot2docker-{{ user `boot2docker_version` }}.box",
+      "type": "vagrant",
+      "vagrantfile_template": "{{ user `vagrantfile_template` }}",
+      "only": ["virtualbox-iso"]
+    }
+  ]
+}
