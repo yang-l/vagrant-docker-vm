@@ -4,12 +4,20 @@
 
   pre_tasks:
   - include: playbooks/set-authorized-key.yml
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   - include: playbooks/sudoer.yml
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
   roles:
   - role: virtualbox-guest
     virtualbox_version: "5.1.14"
     iso_checksum: "sha256:1b206b76050dccd3ed979307230f9ddea79551e1c0aba93faee77416733cdc8a"
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   - role: docker
     docker_group_members:
     - "{{ vagrant_user }}"
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+  post_tasks:
+  - include: playbooks/post-inst-pkg.yml
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'

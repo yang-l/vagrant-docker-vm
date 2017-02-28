@@ -1,7 +1,7 @@
 all: boot2docker debian-jessie
 
 boot2docker:
-	packer build -force boot2docker.json
+	time packer build -force boot2docker.json
 
 boot2docker-box-install:
 	vagrant box add boot2docker box/virtualbox/boot2docker-v1.13.1.box
@@ -10,7 +10,7 @@ boot2docker-box-remove:
 	vagrant box remove boot2docker
 
 debian-jessie:
-	packer build -force debian-jessie.json
+	time packer build -force debian-jessie.json
 
 debian-jessie-box-install:
 	vagrant box add debian-jessie box/virtualbox/debian-8.7.1-amd64.box

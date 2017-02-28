@@ -7,6 +7,12 @@ Requires:
 - packer
 - vagrant
 - virtualbox
+- git
+
+OSX (on Mac)
+- XQuartz
+- port install terminus-font
 
 Note:
+- some files are based on [[https://github.com/AlbanMontaigu/boot2docker-vagrant-box][AlbanMontaigu's GitHub]]
 - change ssh pub and private key configs with your own key settings

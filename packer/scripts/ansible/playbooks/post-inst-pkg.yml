@@ -1,0 +1,16 @@
+---
+- name: Update repositories
+  apt:
+    update_cache: yes
+  become: true
+
+- name: Install packages
+  apt:
+    name: "{{ item }}"
+    state: present
+    install_recommends: no
+  with_items:
+  - rxvt-unicode
+  - tmux
+  - emacs
+  become: true
