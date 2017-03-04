@@ -1,5 +1,9 @@
 all: boot2docker debian-jessie
 
+install-boxes: boot2docker-box-install debian-jessie-box-install
+
+remove-boxes: boot2docker-box-remove debian-jessie-box-remove
+
 boot2docker:
 	time packer build -force boot2docker.json
 
@@ -18,6 +22,6 @@ debian-jessie-box-install:
 debian-jessie-box-remove:
 	vagrant box remove debian-jessie
 
-.PHONY: all \
+.PHONY: all install-boxes remove-boxes \
         boot2docker boot2docker-box-install boot2docker-box-remove \
         debian-jessie debian-jessie-box-install debian-jessie-box-remove
