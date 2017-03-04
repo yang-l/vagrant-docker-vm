@@ -4,13 +4,15 @@
     update_cache: yes
   become: true
 
-- name: Install packages
+- name: apt-get install packages
   apt:
     name: "{{ item }}"
     state: present
     install_recommends: no
   with_items:
   - rxvt-unicode
+  - xfonts-terminus
   - tmux
   - emacs
+  - rsync
   become: true
