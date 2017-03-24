@@ -17,4 +17,4 @@ Note:
 - change ssh pub and private key configs with your own key settings
 
 Cmds:
-- to launch urxvt w/ tmux from a VM on the host, executing "ssh -Y -t -p 2222 -l vagrant 127.0.0.1 urxvt -fn xft:terminus:style=Regular:pixelsize=18 -fb xft:terminus:style=Bold:pixelsize=18 -depth 24 -geometry 180x50 -e tmux"
+- to launch urxvt w/ tmux from a VM on the host, executing "ssh -XY -t -A -p 2222 -l vagrant 127.0.0.1 urxvt -fn xft:terminus:style=Regular:pixelsize=18 -fb xft:terminus:style=Bold:pixelsize=18 -depth 24 -geometry 180x50 -e tmux"
