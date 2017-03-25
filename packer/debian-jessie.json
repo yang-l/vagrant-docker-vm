@@ -8,7 +8,7 @@
     "vm_cpu": "1",
     "vm_memory": "2048",
     "vm_disksize": "50000",
-    "headless": "false",
+    "headless": "true",
     "vagrantfile_template": "vagrantfile.debian-jessie.tpl"
   },
   "builders": [
