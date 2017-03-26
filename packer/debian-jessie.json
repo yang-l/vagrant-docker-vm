@@ -72,7 +72,7 @@
     {
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
       "scripts": [
-        "scripts/init.sh"
+        "scripts/debian-init.sh"
       ],
       "type": "shell"
     },
