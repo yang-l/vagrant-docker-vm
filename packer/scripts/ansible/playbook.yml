@@ -21,3 +21,9 @@
   post_tasks:
   - include: playbooks/post-inst-pkg.yml
     when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  - name: create ~/.config with the right ownership
+    file:
+      path: "/home/{{ vagrant_user }}/.config"
+      state: directory
+      owner: "{{ vagrant_user }}"
+      group: "{{ vagrant_user }}"

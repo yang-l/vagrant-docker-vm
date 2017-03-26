@@ -26,6 +26,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.synced_folder '~/.config/hist_backup', '/home/' + vm_login_user + '/.config/hist_backup/', create: true, owner: vm_login_user
     config.vm.synced_folder '~/Downloads', '/home/' + vm_login_user + '/Downloads', create: true, owner: vm_login_user
 
+    # correct ~/.config ownership
+    config.vm.provision "shell", inline: 'chown ' + vm_login_user + ' /home/' + vm_login_user + '/.config/'
+
     config.vm.provider "virtualbox" do |vb|
         vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
         vb.memory = 2048
