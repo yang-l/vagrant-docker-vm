@@ -17,10 +17,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provision 'file', source: '~/.config/bashrc', destination: '${HOME}/.bashrc'
     config.vm.provision 'file', source: '~/.gitconfig', destination: '${HOME}/.gitconfig'
     config.vm.provision 'file', source: '~/.tmux.conf', destination: '${HOME}/.tmux.conf'
+    config.vm.provision 'file', source: '~/.ssh/', destination: '${HOME}/'
     config.vm.synced_folder '~/.aws', '/home/' + vm_login_user + '/.aws', create: true, owner: vm_login_user
     config.vm.synced_folder '~/.emacs.d', '/home/' + vm_login_user + '/.emacs.d', create: true, owner: vm_login_user
     config.vm.synced_folder '~/.config/hist_backup', '/home/' + vm_login_user + '/.config/hist_backup/', create: true, owner: vm_login_user
-    config.vm.synced_folder '~/.ssh', '/home/' + vm_login_user + '/.ssh', create: true, owner: vm_login_user
     config.vm.synced_folder '~/Downloads', '/home/' + vm_login_user + '/Downloads', create: true, owner: vm_login_user
 
     config.vm.provider "virtualbox" do |virtualbox|
