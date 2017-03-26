@@ -8,7 +8,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # disable default synced folder
     config.vm.synced_folder '.', '/vagrant', disabled: true
-    config.vm.synced_folder '~/vagrant-syncd-vol', '/srv/vagrant', create: true
+    config.vm.synced_folder '~/vagrant-syncd-vol', '/srv/vagrant', create: true, owner: vm_login_user
 
     # set default configs
     config.vm.provision 'file', source: '~/.Xdefaults', destination: '${HOME}/.Xdefaults'
@@ -17,11 +17,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provision 'file', source: '~/.config/bashrc', destination: '${HOME}/.bashrc'
     config.vm.provision 'file', source: '~/.gitconfig', destination: '${HOME}/.gitconfig'
     config.vm.provision 'file', source: '~/.tmux.conf', destination: '${HOME}/.tmux.conf'
-    config.vm.synced_folder '~/.aws', '/home/' + vm_login_user + '/.aws', create: true
-    config.vm.synced_folder '~/.emacs.d', '/home/' + vm_login_user + '/.emacs.d', create: true
-    config.vm.synced_folder '~/.config/hist_backup', '/home/' + vm_login_user + '/.config/hist_backup/', create: true
-    config.vm.synced_folder '~/.ssh', '/home/' + vm_login_user + '/.ssh', create: true
-    config.vm.synced_folder '~/Downloads', '/home/' + vm_login_user + '/Downloads', create: true
+    config.vm.synced_folder '~/.aws', '/home/' + vm_login_user + '/.aws', create: true, owner: vm_login_user
+    config.vm.synced_folder '~/.emacs.d', '/home/' + vm_login_user + '/.emacs.d', create: true, owner: vm_login_user
+    config.vm.synced_folder '~/.config/hist_backup', '/home/' + vm_login_user + '/.config/hist_backup/', create: true, owner: vm_login_user
+    config.vm.synced_folder '~/.ssh', '/home/' + vm_login_user + '/.ssh', create: true, owner: vm_login_user
+    config.vm.synced_folder '~/Downloads', '/home/' + vm_login_user + '/Downloads', create: true, owner: vm_login_user
 
     config.vm.provider "virtualbox" do |virtualbox|
         virtualbox.memory = 2048
