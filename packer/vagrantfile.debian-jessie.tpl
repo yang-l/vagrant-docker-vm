@@ -5,6 +5,7 @@ vm_login_user           = "vagrant"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.ssh.private_key_path = "~/.ssh/id_rsa_vagrant.pem"
     config.ssh.forward_agent = true
+    config.ssh.forward_x11 = true
 
     # disable default synced folder
     config.vm.synced_folder '.', '/vagrant', disabled: true
